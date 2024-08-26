@@ -140,6 +140,8 @@ if selected == 3:
         # Display the data table
         st.write("Data Table:")
         st.write(data.head(10))  # display the first 10 rows of the data
+
+        sac.divider(label='Result', icon='result', align='center', color='gray')
     
         # Define the model file path
         model_file_path = "linear_reg_model(1).pkl"
@@ -238,7 +240,7 @@ if selected == 3:
             # Calculate the Mean Squared Error (MSE)
             mse = mean_squared_error(y, y_pred)
         
-            sac.divider(label='Result', icon='result', align='center', color='gray')
+            
             
             st.markdown("<hr>", unsafe_allow_html=True)
             

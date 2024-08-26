@@ -169,7 +169,7 @@ elif selected == 3:
         st.write("Please upload a CSV or Excel file.")
 
 # Data Transformation
-elif selected == 2:
+elif selected == 4:
     st.title("Data Transformation")
     if st.session_state.uploaded_file is not None:
         data = load_data(st.session_state.uploaded_file)
@@ -188,7 +188,7 @@ elif selected == 2:
         st.write("Please upload a CSV or Excel file first.")
 
 # Auto Train ML Model
-elif selected == 3:
+elif selected == 5:
     st.title("Auto Train ML Model")
     if st.session_state.uploaded_file is not None:
         data = load_data(st.session_state.uploaded_file)
@@ -210,7 +210,7 @@ elif selected == 3:
         st.write("Please upload a CSV or Excel file first.")
 
 # Freeze the Learning
-elif selected == 4:
+elif selected == 6:
     st.title("Freeze the Learning")
     if st.session_state.uploaded_file is not None:
         data = load_data(st.session_state.uploaded_file)

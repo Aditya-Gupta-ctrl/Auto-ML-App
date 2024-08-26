@@ -7,4 +7,3 @@ streamlit-elements
 dashboard
 pandas-profiling
 requests
-io

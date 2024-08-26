@@ -4,7 +4,7 @@ import os
 import pickle
 import pandas as pd
 import numpy as np
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
+from sklearn.metrics import r2_score, mean_squared_error
 from sklearn.linear_model import LinearRegression
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
@@ -12,112 +12,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import AdaBoostRegressor
-from sklearn.model_selection import train_test_split
 
-def load_data(file):
-    """
-    Load data from a CSV or Excel file.
-
-    Args:
-        file (UploadedFile): The uploaded file.
-
-    Returns:
-        pd.DataFrame: The loaded data.
-    """
-    try:
-        if file.name.endswith('.csv'):
-            data = pd.read_csv(file)
-        elif file.name.endswith('.xlsx'):
-            data = pd.read_excel(file)
-        else:
-            st.error("Please upload a CSV or Excel file.")
-            return None
-        
-        # Check if the file is empty
-        if data.empty:
-            st.error("The file is empty. Please upload a file with data.")
-            return None
-        
-        return data
-    except pd.errors.EmptyDataError:
-        st.error("The file is empty. Please upload a file with data.")
-        return None
-    except pd.errors.ParserError:
-        st.error("Error parsing the file. Please check the file format.")
-        return None
-    except Exception as e:
-        st.error(f"An error occurred while loading the file: {e}")
-        return None
-
-# Function to preprocess data
-def preprocess_data(data, target_column):
-    """
-    Preprocess the data by handling missing values and encoding categorical variables.
-
-    Args:
-        data (pd.DataFrame): The data to preprocess.
-        target_column (str): The target column.
-
-    Returns:
-        pd.DataFrame: The preprocessed data.
-    """
-    numeric_features = data.select_dtypes(include=['int64', 'float64']).columns
-    categorical_features = data.select_dtypes(include=['object']).columns
-
-    numeric_features = [col for col in numeric_features if col != target_column]
-    categorical_features = [col for col in categorical_features if col != target_column]
-
-    numeric_transformer = Pipeline(steps=[
-        ('imputer', SimpleImputer(strategy='median')),
-    ])
-
-    categorical_transformer = Pipeline(steps=[
-        ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
-        ('le', LabelEncoder())
-    ])
-
-    preprocessor = ColumnTransformer(
-        transformers=[
-            ('num', numeric_transformer, numeric_features),
-            ('cat', categorical_transformer, categorical_features)
-        ]
-    )
-
-    X = data.drop(columns=[target_column])
-    y = data[target_column]
-
-    X_preprocessed = preprocessor.fit_transform(X)
-    return X_preprocessed, y
-
-# Function to train models
-def train_models(X, y):
-    """
-    Train multiple models on the data.
-
-    Args:
-        X (pd.DataFrame): The preprocessed data.
-        y (pd.Series): The target variable.
-
-    Returns:
-        dict: A dictionary containing the trained models and their performance metrics.
-    """
-    models = {
-        "Linear Regression": LinearRegression(),
-        "Decision Tree": DecisionTreeRegressor(),
-        "AdaBoost": AdaBoostRegressor(),
-    }
-    results = {}
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    for model_name, model in models.items():
-        pipeline = Pipeline(steps=[('model', model)])
-        pipeline.fit(X_train, y_train)
-        y_pred = pipeline.predict(X_test)
-        r2 = r2_score(y_test, y_pred)
-        mse = mean_squared_error(y_test, y_pred)
-        mae = mean_absolute_error(y_test, y_pred)
-        mape = mean_absolute_percentage_error(y_test, y_pred)
-        results[model_name] = {'model': pipeline, 'r2': r2, 'mse': mse, 'mae': mae, 'mape': mape}
-    return results
 
 # Set page config
 st.set_page_config(
@@ -126,11 +21,14 @@ st.set_page_config(
     layout="wide",
 )
 
+
 # Create a session state variable to store the uploaded file
 if 'uploaded_file' not in st.session_state:
     st.session_state.uploaded_file = None
 
-# Menu Bar
+
+
+#Menu Bar
 with st.sidebar:
     selected = sac.menu([
         sac.MenuItem('home', icon='house-fill'),
@@ -149,92 +47,287 @@ with st.sidebar:
         ]),
     ], size='lg', variant='left-bar', color='grape', open_all=True, return_index=True)
 
-# Home bar
+
+#Home bar
 if selected == 0:
-    st.title("Home")
-    st.write("Welcome to the ML model application!")
+    st.header("Welcome to ML Model")
 
-# Data Ingestion
-elif selected == 3:
-    st.title("Data Ingestion")
-    file_uploader = st.file_uploader("Upload a CSV or Excel file", type=['csv', 'xlsx'])
-    if file_uploader is not None:
-        st.session_state.uploaded_file = file_uploader
-        data = load_data(st.session_state.uploaded_file)
-        if data is not None:
-            st.write("File uploaded successfully!")
-            st.write("Data preview:")
-            st.dataframe(data.head(10))  # Show the first 10 rows of the data
-        else:
-            st.write("Error loading data. Please check the file format.")
-    else:
-        st.write("Please upload a CSV or Excel file.")
+    st.write("This is a machine learning model that allows you to upload your dataset, select the target column, and train a simple linear regression model. The model will then make predictions on the uploaded data.")
 
-# Data Transformation
-elif selected == 4:
-    st.title("Data Transformation")
-    if st.session_state.uploaded_file is not None:
-        data = load_data(st.session_state.uploaded_file)
-        if data is not None:
-            st.write("Data loaded successfully!")
-            target_column = st.selectbox("Select the target column", data.columns)
-            X, y = preprocess_data(data, target_column)
-            st.write("Data preprocessed successfully!")
-            st.write("Features:")
-            st.write(X.head())
-            st.write("Target:")
-            st.write(y.head())
-        else:
-            st.write("Error loading data. Please check the file format.")
-    else:
-        st.write("Please upload a CSV or Excel file first.")
+    st.subheader("Features")
 
-# Auto Train ML Model
-elif selected == 5:
-    st.title("Auto Train ML Model")
-    if st.session_state.uploaded_file is not None:
-        data = load_data(st.session_state.uploaded_file)
-        if data is not None:
-            target_column = st.selectbox("Select the target column", data.columns)
-            X, y = preprocess_data(data, target_column)
-            models = train_models(X, y)
-            st.write("Models trained successfully!")
-            model_names = list(models.keys())
-            selected_model = st.selectbox("Select a model", model_names)
-            st.write(f"Model: {selected_model}")
-            st.write(f"R2 score: {models[selected_model]['r2']:.3f}")
-            st.write(f"MSE: {models[selected_model]['mse']:.3f}")
-            st.write(f"MAE: {models[selected_model]['mae']:.3f}")
-            st.write(f"MAPE: {models[selected_model]['mape']:.3f}")
-        else:
-            st.write("Error loading data. Please check the file format.")
-    else:
-        st.write("Please upload a CSV or Excel file first.")
+    st.write("The following features are available in this model:")
 
-# Freeze the Learning
-elif selected == 6:
-    st.title("Freeze the Learning")
-    if st.session_state.uploaded_file is not None:
-        data = load_data(st.session_state.uploaded_file)
-        if data is not None:
-            target_column = st.selectbox("Select the target column", data.columns)
-            X, y = preprocess_data(data, target_column)
-            models = train_models(X, y)
-            st.write("Models trained successfully!")
-            model_names = list(models.keys())
-            selected_models = st.multiselect("Select models to compare", model_names)
-            if selected_models:
-                st.write("Model comparison:")
-                for model_name in selected_models:
-                    st.write(f"Model: {model_name}")
-                    st.write(f"R2 score: {models[model_name]['r2']:.3f}")
-                    st.write(f"MSE: {models[model_name]['mse']:.3f}")
-                    st.write(f"MAE: {models[model_name]['mae']:.3f}")
-                    st.write(f"MAPE: {models[model_name]['mape']:.3f}")
-                    st.write("")
+    features = [
+        "Data Ingestion: Upload your dataset in CSV or Excel format",
+        "Target Column Selection: Select the column you want to predict",
+        "Model Training: Train a simple linear regression model on your data",
+        "Predictions: Get predictions on your uploaded data"
+    ]
+
+    for feature in features:
+        st.write(f"* {feature}")
+
+    st.subheader("How it Works")
+
+    st.write("Here's a step-by-step guide on how to use this model:")
+
+    steps = [
+        "Upload your dataset using the file uploader",
+        "Select the target column from the dropdown menu",
+        "Click the 'Train Model' button to train the model",
+        "Get predictions on your uploaded data"
+    ]
+
+    for step in steps:
+        st.write(f"* {step}")
+
+    st.subheader("Benefits")
+
+    st.write("Using this model, you can:")
+
+    benefits = [
+        "Quickly upload and analyze your dataset",
+        "Select the target column with ease",
+        "Train a simple linear regression model with minimal effort",
+        "Get accurate predictions on your uploaded data"
+    ]
+
+    for benefit in benefits:
+        st.write(f"* {benefit}")
+    
+uploaded_file = None
+
+# Data Ingestion tab
+if selected == 3:
+    st.header("Data Ingestion")
+    
+    # Create a file uploader
+    uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
+    
+    if uploaded_file:
+        # Store the uploaded file in the session state
+        st.session_state.uploaded_file = uploaded_file
+        
+        # Create the uploads directory if it doesn't exist
+        uploads_dir = "uploads"
+        if not os.path.exists(uploads_dir):
+            os.makedirs(uploads_dir)
+    
+        # Handle the uploaded file
+        file_path = os.path.join(uploads_dir, uploaded_file.name)
+        with open(file_path, "wb") as f:
+            f.write(uploaded_file.read())
+        st.success("File uploaded successfully!")
+    
+        # Get the file name and path
+        file_name = uploaded_file.name
+        file_path = file_path
+    
+        # Display the file name and path
+        st.write(f"File name: {file_name}")
+        st.write(f"File path: {file_path}")
+    
+        # Load the uploaded data
+        if file_name.endswith('.csv'):
+            data = pd.read_csv(file_path)
+        elif file_name.endswith('.xlsx'):
+            data = pd.read_excel(file_path)
+    
+        # Display the data dimensions
+        st.write(f"Data shape: {data.shape}")
+    
+        # Define the model file path
+        model_file_path = "linear_reg_model(1).pkl"
+    
+        # Get the column names
+        columns = data.columns.tolist()
+    
+        # Create a dropdown to select the target column
+        target_column = st.selectbox("Select the target column", columns)
+    
+        # Select the correct features
+        features = [col for col in columns if col != target_column]
+    
+        # Define X as the feature columns
+        X = data[features]
+    
+        # Define y as the target column
+        y = data[target_column]
+    
+        try:
+            y = pd.to_numeric(y, errors='coerce')
+        except ValueError as e:
+            st.error(f"An error occurred while converting the target column to numeric: {e}")
+    
+        # Train and save the model if it doesn't exist
+        if not os.path.exists(model_file_path):
+            # Handle missing values
+            numeric_features = [col for col in X.columns if X[col].dtype.kind in 'bifc']
+    
+            if not numeric_features:
+                st.error("No numeric features found in the data. Please check your data and try again.")
             else:
-                st.write("Please select at least one model to compare.")
+                numeric_transformer = Pipeline(steps=[
+                    ('imputer', SimpleImputer(strategy='mean')),
+                ])
+    
+                preprocessor = ColumnTransformer(
+                    transformers=[
+                        ('num', numeric_transformer, numeric_features),
+                    ]
+                )
+    
+                # Train a simple linear regression model
+                model = Pipeline(steps=[('preprocessor', preprocessor),
+                                        ('regressor', LinearRegression())])
+                model.fit(X, y)
+    
+                # Save the model to a file
+                with open(model_file_path, 'wb') as handle:
+                    pickle.dump(model, handle)
+        
+    
+        # Load the pre-trained model
+        with open(model_file_path, 'rb') as handle:
+            model = pickle.load(handle)
+    
+        # Get the column names expected by the ColumnTransformer
+        expected_columns = model.named_steps['preprocessor'].transformers_[0][2]
+        
+        # Get the actual columns in the data
+        actual_columns = X.columns
+        
+        # Get the common columns between the expected columns and the actual columns
+        common_columns = list(set(expected_columns) & set(actual_columns))
+        
+        # Check if all expected columns are present in X
+        if not common_columns:
+            st.error("No common columns found between the expected columns and the actual columns. Please check your data and try again.")
         else:
-            st.write("Error loading data. Please check the file format.")
+            # Use the common columns to make predictions
+            X_common = X[common_columns]
+        
+            # Create a new ColumnTransformer with the common columns
+            new_transformer = ColumnTransformer(
+                transformers=[
+                    ('num', model.named_steps['preprocessor'].transformers_[0][1], common_columns),
+                ]
+            )
+        
+            # Fit the new ColumnTransformer to the data
+            new_transformer.fit(X_common)
+        
+            # Create a new Pipeline with the new ColumnTransformer
+            new_model = Pipeline(steps=[('preprocessor', new_transformer),
+                                      ('regressor', model.named_steps['regressor'])])
+        
+            # Fit the new Pipeline to the data
+            new_model.fit(X_common, y)
+        
+            # Make predictions with the new model
+            y_pred = new_model.predict(X_common)
+        
+            # Calculate the accuracy score (R-squared)
+            r2 = r2_score(y, y_pred)
+        
+            # Calculate the Mean Squared Error (MSE)
+            mse = mean_squared_error(y, y_pred)
+        
+            sac.divider(label='Result', icon='result', align='center', color='gray')
+            
+            st.markdown("<hr>", unsafe_allow_html=True)
+            
+            # Display the accuracy score (R-squared)
+            st.subheader("R2 Score")
+            st.write(f"R-squared: {r2:.2f}")
+    
+            # Display the Mean Squared Error (MSE)
+            st.subheader("MSE Score")
+            st.write(f"Mean Squared Error (MSE): {mse:.2f}")
+
+            # Display the predictions
+            st.subheader("Prediction Result")
+            st.write("Predictions:")
+            st.write(y_pred)
+
+
+
+
+# Freeze the Learning tab
+if selected == 6:
+    st.header("Freeze the Learning")
+
+    if st.session_state.uploaded_file is None:
+        st.error("Please upload a file in the Data Ingestion section")
     else:
-        st.write("Please upload a CSV or Excel file first.")
+        # Load the uploaded file
+        file_path = "uploads/" + st.session_state.uploaded_file.name
+        if st.session_state.uploaded_file.name.endswith('.csv'):
+            data = pd.read_csv(file_path)
+        elif st.session_state.uploaded_file.name.endswith('.xlsx'):
+            data = pd.read_excel(file_path)
+
+        # Display the uploaded data
+        st.write("Uploaded Data:")
+        st.write(data)
+
+        # Get the target column
+        target_column = st.selectbox("Select the target column", data.columns)
+
+        # Create a pipeline for the model
+        numeric_features = data.select_dtypes(include=['int64', 'float64']).columns
+        categorical_features = data.select_dtypes(include=['object']).columns
+
+        numeric_features = [col for col in numeric_features if col != target_column]
+        categorical_features = [col for col in categorical_features if col != target_column]
+
+        numeric_transformer = Pipeline(steps=[
+            ('imputer', SimpleImputer(strategy='median')),
+        ])
+
+        categorical_transformer = Pipeline(steps=[
+            ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
+            ('le', LabelEncoder())
+        ])
+
+        preprocessor = ColumnTransformer(
+            transformers=[
+                ('num', numeric_transformer, numeric_features),
+                ('cat', categorical_transformer, categorical_features)
+            ]
+        )
+
+        # Define the models
+        models = {
+            "Linear Regression": LinearRegression(),
+            "Decision Tree": DecisionTreeRegressor(),
+            "AdaBoost": AdaBoostRegressor(),
+            #"XGBoost": XGBRegressor()
+        }
+
+        # Train the models
+        X = data.drop(columns=[target_column])
+        y = data[target_column]
+
+        # Check if the target column is numeric
+        if pd.api.types.is_numeric_dtype(y):
+            for model_name, model in models.items():
+                pipeline = Pipeline(steps=[('preprocessor', preprocessor),
+                                           ('model', model)])
+                pipeline.fit(X, y)
+
+                # Make predictions
+                predictions = pipeline.predict(X)
+
+                # Display the predictions
+                st.write(f"{model_name} Predictions:")
+                st.write(predictions)
+
+                # Evaluate the model
+                r2 = r2_score(y, predictions)
+                mse = mean_squared_error(y, predictions)
+                st.write(f"{model_name} R2 Score:", r2)
+                st.write(f"{model_name} Mean Squared Error:", mse)
+        else:
+            st.error("The target column must be numeric.")

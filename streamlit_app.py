@@ -46,7 +46,7 @@ with st.sidebar:
             sac.MenuItem('@1', icon='', href=''),
             sac.MenuItem('@2', icon='', href=''),
         ]),
-    ], size='lg', variant='left-bar', color='grape', open_all=False, return_index=True)
+    ], size='lg', variant='left-bar', color='grape', open_all=True, return_index=True)
 
 
 #Home bar

@@ -143,7 +143,7 @@ if selected == 0:
     st.write("Welcome to the ML model application!")
 
 # Data Ingestion
-elif selected == 2:
+elif selected == 3:
     st.title("Data Ingestion")
     file_uploader = st.file_uploader("Upload a CSV or Excel file", type=['csv', 'xlsx'])
     if file_uploader is not None:
@@ -153,7 +153,7 @@ elif selected == 2:
         st.write("Please upload a CSV or Excel file.")
 
 # Data Transformation
-elif selected == 3:
+elif selected == 4:
     st.title("Data Transformation")
     if st.session_state.uploaded_file is not None:
         file_path = st.session_state.uploaded_file.name
@@ -169,7 +169,7 @@ elif selected == 3:
         st.write("Please upload a CSV or Excel file first.")
 
 # Auto Train ML Model
-elif selected == 4:
+elif selected == 5:
     st.title("Auto Train ML Model")
     if st.session_state.uploaded_file is not None:
         file_path = st.session_state.uploaded_file.name
@@ -192,7 +192,7 @@ elif selected == 4:
         st.write("Please upload a CSV or Excel file first.")
 
 # Freeze the Learning
-elif selected == 5:
+elif selected == 6:
     st.title("Freeze the Learning")
     if st.session_state.uploaded_file is not None:
         file_path = st.session_state.uploaded_file.name

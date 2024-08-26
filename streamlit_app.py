@@ -400,8 +400,6 @@ if selected == 6:
 if selected == 8:
     st.header("About")
 
-    # Create a container with a rounded corner box border
-    st.markdown("<div style='border: 1px solid #000000; padding: 20px; border-radius: 20px; background-color: #f9f9f9'>", unsafe_allow_html=True)
         
         st.write("This is a machine learning model that allows you to upload your dataset, select the target column, and train a simple linear regression model. The model will then make predictions on the uploaded data.")
     
@@ -444,12 +442,30 @@ if selected == 8:
     
         for feature in features:
             st.write(f"* {feature}")
+
+        st.write("The predictions, R-squared score, and Mean Squared Error (MSE) will be displayed for each model.")
+
+
+        st.subheader("Freeze the Learning")
     
+        st.write("If you want to freeze the learning, you can do so in the 'Freeze the Learning' tab. Simply upload a file and select the target column. The following models will be trained:")
+    
+        featuress = [
+            "Linear Regression",
+            "Decision Tree",
+            "AdaBoost",
+            "Random Forest",
+            "XG Boost"
+        ]
+    
+        for feature in featuress:
+            st.write(f"* {feature}")
+
+        st.write("The predictions, R-squared score, and Mean Squared Error (MSE) will be displayed for each model. However, the models will not be updated even if new data is uploaded.")
         
     
         st.subheader("Conclusion")
     
         st.write("This ML model allows you to quickly upload and analyze your dataset, select the target column, and train a simple")
     
-    # Close the container
-    st.markdown("</div>", unsafe_allow_html=True)
+   

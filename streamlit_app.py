@@ -315,12 +315,6 @@ if selected == 4:
 if selected == 5:
     st.header("Auto Traim ML Model")
 
-        
-
-# Freeze the Learning tab
-if selected == 6:
-    st.header("Freeze the Learning")
-
     if st.session_state.uploaded_file is None:
         st.error("Please upload a file in the Data Ingestion section")
     else:
@@ -394,6 +388,13 @@ if selected == 6:
                 st.write(f"{model_name} Mean Squared Error:", mse)
         else:
             st.error("The target column must be numeric.")
+        
+
+# Freeze the Learning tab
+if selected == 6:
+    st.header("Freeze the Learning")
+
+
 
 
 

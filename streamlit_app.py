@@ -136,6 +136,10 @@ if selected == 3:
     
         # Display the data dimensions
         st.write(f"Data shape: {data.shape}")
+
+        # Display the data table
+        st.write("Data Table:")
+        st.write(data.head(10))  # display the first 10 rows of the data
     
         # Define the model file path
         model_file_path = "linear_reg_model(1).pkl"

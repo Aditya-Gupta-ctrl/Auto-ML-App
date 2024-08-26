@@ -14,7 +14,6 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import AdaBoostRegressor
 from sklearn.model_selection import train_test_split
 
-# Function to load data
 def load_data(file):
     """
     Load data from a CSV or Excel file.
@@ -39,13 +38,13 @@ def load_data(file):
             st.error("The file is empty. Please upload a file with data.")
             return None
         
-        # Check if the file contains any columns
-        if len(data.columns) == 0:
-            st.error("The file does not contain any columns. Please upload a file with data.")
-            return None
-        
         return data
-    
+    except pd.errors.EmptyDataError:
+        st.error("The file is empty. Please upload a file with data.")
+        return None
+    except pd.errors.ParserError:
+        st.error("Error parsing the file. Please check the file format.")
+        return None
     except Exception as e:
         st.error(f"An error occurred while loading the file: {e}")
         return None
@@ -170,7 +169,7 @@ elif selected == 3:
         st.write("Please upload a CSV or Excel file.")
 
 # Data Transformation
-elif selected == 4:
+elif selected == 2:
     st.title("Data Transformation")
     if st.session_state.uploaded_file is not None:
         data = load_data(st.session_state.uploaded_file)
@@ -179,13 +178,17 @@ elif selected == 4:
             target_column = st.selectbox("Select the target column", data.columns)
             X, y = preprocess_data(data, target_column)
             st.write("Data preprocessed successfully!")
+            st.write("Features:")
+            st.write(X.head())
+            st.write("Target:")
+            st.write(y.head())
         else:
             st.write("Error loading data. Please check the file format.")
     else:
         st.write("Please upload a CSV or Excel file first.")
 
 # Auto Train ML Model
-elif selected == 5:
+elif selected == 3:
     st.title("Auto Train ML Model")
     if st.session_state.uploaded_file is not None:
         data = load_data(st.session_state.uploaded_file)
@@ -207,7 +210,7 @@ elif selected == 5:
         st.write("Please upload a CSV or Excel file first.")
 
 # Freeze the Learning
-elif selected == 6:
+elif selected == 4:
     st.title("Freeze the Learning")
     if st.session_state.uploaded_file is not None:
         data = load_data(st.session_state.uploaded_file)

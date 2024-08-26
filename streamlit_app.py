@@ -258,7 +258,45 @@ if selected == 3:
             st.write("Predictions:")
             st.write(y_pred)
 
-
+# Data Transformation tab
+if selected == 4:
+    st.header("Data Transformation")
+    
+    # Check if a file has been uploaded
+    if 'uploaded_file' in st.session_state:
+        # Get the uploaded file
+        uploaded_file = st.session_state.uploaded_file
+        
+        # Load the uploaded data
+        if uploaded_file.name.endswith('.csv'):
+            data = pd.read_csv(uploaded_file)
+        elif uploaded_file.name.endswith('.xlsx'):
+            data = pd.read_excel(uploaded_file)
+        
+        # Display the data dimensions
+        st.write(f"Original Data Shape: {data.shape}")
+        
+        # Display the data table
+        st.write("Original Data Table:")
+        st.write(data.head(10))  # display the first 10 rows of the data
+        
+        # Add a feature to remove columns
+        columns_to_remove = st.multiselect("Select columns to remove:", data.columns)
+        if columns_to_remove:
+            data = data.drop(columns=columns_to_remove)
+            st.write("Columns removed successfully!")
+        
+        # Display the updated data dimensions
+        st.write(f"Updated Data Shape: {data.shape}")
+        
+        # Display the updated data table
+        st.write("Updated Data Table:")
+        st.write(data.head(10))  # display the first 10 rows of the updated data
+        
+        # Store the updated data in the session state
+        st.session_state.data = data
+    else:
+        st.write("Please upload a file first.")
 
 
 # Freeze the Learning tab

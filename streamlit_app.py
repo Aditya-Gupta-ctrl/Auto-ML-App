@@ -104,8 +104,7 @@ uploaded_file = None
 if selected == 3:
     st.header("Data Ingestion")
 
-    # Create a container with a rounded corner box border
-    st.markdown("<div style='border: 1px solid #000000; padding: 20px; border-radius: 20px; background-color: #f9f9f9'>", unsafe_allow_html=True)
+
     
     # Create a file uploader
     uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
@@ -259,8 +258,7 @@ if selected == 3:
             st.write("Predictions:")
             st.write(y_pred)
 
-    # Close the container
-    st.markdown("</div>", unsafe_allow_html=True)
+   
 
 
 
@@ -402,51 +400,56 @@ if selected == 6:
 if selected == 8:
     st.header("About")
 
-    st.write("This is a machine learning model that allows you to upload your dataset, select the target column, and train a simple linear regression model. The model will then make predictions on the uploaded data.")
-
-    st.subheader("Data Ingestion")
-
-    st.write("To ingest data, simply upload a CSV or Excel file using the file uploader. The uploaded file will be stored in the 'uploads' directory. The file name and path will be displayed once the file has been uploaded successfully.")
-
-    st.subheader("Target Column Selection")
-
-    st.write("After uploading the dataset, select the target column from the dropdown menu. The feature columns will be automatically selected based on the target column.")
-
-    st.subheader("Model Training")
-
-    st.write("Once the target column has been selected, click the 'Train Model' button to train the model. The model will be trained using a simple linear regression algorithm.")
-
-    st.subheader("Predictions")
-
-    st.write("After training the model, you can get predictions on your uploaded data. The predictions will be displayed along with the accuracy score (R-squared) and the Mean Squared Error (MSE).")
-    st.write("Note: The accuracy score (R-squared) measures the proportion of the variance in the dependent variable that is predictable from the independent variable(s). The Mean Squared Error (MSE) measures the average squared difference between the actual and predicted values. A lower MSE indicates a better fit.")
-
-    st.subheader("Data Transformation")
-
-    st.write("If you need to transform your data before training the model, you can do so in the 'Data Transformation' tab. Simply upload a file and select the columns to remove. The updated data will be displayed along with the updated data dimensions.")
-
-    st.subheader("Auto Train ML Model")
-
-    st.write("If you want to train multiple models at once, you can do so in the 'Auto Train ML Model' tab. Simply upload a file and select the target column. The following models will be trained:")
-
-    st.subheader("Auto Train ML Model")
-
-    st.write("If you want to train multiple models at once, you can do so in the 'Auto Train ML Model' tab. Simply upload a file and select the target column. The following models will be trained:")
-
-    features = [
-        "Linear Regression",
-        "Decision Tree",
-        "AdaBoost",
-        "Random Forest",
-        "XG Boost"
-    ]
-
-    for feature in features:
-        st.write(f"* {feature}")
-
+        # Create a container with a rounded corner box border
+        st.markdown("<div style='border: 1px solid #000000; padding: 20px; border-radius: 20px; background-color: #f9f9f9'>", unsafe_allow_html=True)
+        
+        st.write("This is a machine learning model that allows you to upload your dataset, select the target column, and train a simple linear regression model. The model will then make predictions on the uploaded data.")
     
-
-    st.subheader("Conclusion")
-
-    st.write("This ML model allows you to quickly upload and analyze your dataset, select the target column, and train a simple")
+        st.subheader("Data Ingestion")
     
+        st.write("To ingest data, simply upload a CSV or Excel file using the file uploader. The uploaded file will be stored in the 'uploads' directory. The file name and path will be displayed once the file has been uploaded successfully.")
+    
+        st.subheader("Target Column Selection")
+    
+        st.write("After uploading the dataset, select the target column from the dropdown menu. The feature columns will be automatically selected based on the target column.")
+    
+        st.subheader("Model Training")
+    
+        st.write("Once the target column has been selected, click the 'Train Model' button to train the model. The model will be trained using a simple linear regression algorithm.")
+    
+        st.subheader("Predictions")
+    
+        st.write("After training the model, you can get predictions on your uploaded data. The predictions will be displayed along with the accuracy score (R-squared) and the Mean Squared Error (MSE).")
+        st.write("Note: The accuracy score (R-squared) measures the proportion of the variance in the dependent variable that is predictable from the independent variable(s). The Mean Squared Error (MSE) measures the average squared difference between the actual and predicted values. A lower MSE indicates a better fit.")
+    
+        st.subheader("Data Transformation")
+    
+        st.write("If you need to transform your data before training the model, you can do so in the 'Data Transformation' tab. Simply upload a file and select the columns to remove. The updated data will be displayed along with the updated data dimensions.")
+    
+        st.subheader("Auto Train ML Model")
+    
+        st.write("If you want to train multiple models at once, you can do so in the 'Auto Train ML Model' tab. Simply upload a file and select the target column. The following models will be trained:")
+    
+        st.subheader("Auto Train ML Model")
+    
+        st.write("If you want to train multiple models at once, you can do so in the 'Auto Train ML Model' tab. Simply upload a file and select the target column. The following models will be trained:")
+    
+        features = [
+            "Linear Regression",
+            "Decision Tree",
+            "AdaBoost",
+            "Random Forest",
+            "XG Boost"
+        ]
+    
+        for feature in features:
+            st.write(f"* {feature}")
+    
+        
+    
+        st.subheader("Conclusion")
+    
+        st.write("This ML model allows you to quickly upload and analyze your dataset, select the target column, and train a simple")
+    
+    # Close the container
+    st.markdown("</div>", unsafe_allow_html=True)

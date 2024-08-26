@@ -27,12 +27,25 @@ def load_data(file):
     """
     try:
         if file.name.endswith('.csv'):
-            return pd.read_csv(file)
+            data = pd.read_csv(file)
         elif file.name.endswith('.xlsx'):
-            return pd.read_excel(file)
+            data = pd.read_excel(file)
         else:
             st.error("Please upload a CSV or Excel file.")
             return None
+        
+        # Check if the file is empty
+        if data.empty:
+            st.error("The file is empty. Please upload a file with data.")
+            return None
+        
+        # Check if the file contains any columns
+        if len(data.columns) == 0:
+            st.error("The file does not contain any columns. Please upload a file with data.")
+            return None
+        
+        return data
+    
     except Exception as e:
         st.error(f"An error occurred while loading the file: {e}")
         return None

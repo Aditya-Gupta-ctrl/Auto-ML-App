@@ -395,3 +395,5 @@ if selected == 6:
                 st.write(f"{model_name} Mean Squared Error:", mse)
         else:
             st.error("The target column must be numeric.")
+if selected == 9:
+    st.write("HI")

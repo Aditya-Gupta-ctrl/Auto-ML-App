@@ -41,6 +41,7 @@ with st.sidebar:
             sac.MenuItem('Freeze the Learning', icon=''),
         ]),
         sac.MenuItem('disabled', disabled=True),
+        sac.MenuItem('About', icon=''),
         sac.MenuItem(type='divider'),
         sac.MenuItem('link', type='group', children=[
             sac.MenuItem('@1', icon='', href=''),

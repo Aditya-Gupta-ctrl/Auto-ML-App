@@ -104,7 +104,7 @@ if selected == 3:
     st.header("Data Ingestion")
 
     # Create a container with a rounded corner box border
-    st.markdown("<div style='border: 1px solid #ddd; padding: 20px; border-radius: 20px; background-color: #f9f9f9'>", unsafe_allow_html=True)
+    st.markdown("<div style='border: 1px solid #000000; padding: 20px; border-radius: 20px; background-color: #f9f9f9'>", unsafe_allow_html=True)
     
     # Create a file uploader
     uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)

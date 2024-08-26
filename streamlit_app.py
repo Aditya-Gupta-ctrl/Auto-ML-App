@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit_antd_components as sac
 import os
+import io
 import pickle
 import pandas as pd
 import numpy as np
@@ -271,7 +272,7 @@ if selected == 4:
         if uploaded_file.size > 0:
             # Load the uploaded data
             if uploaded_file.name.endswith('.csv'):
-                data = pd.read_csv(uploaded_file.getbuffer())
+                data = pd.read_csv(io.StringIO(uploaded_file.getbuffer().decode('utf-8')))
             elif uploaded_file.name.endswith('.xlsx'):
                 data = pd.read_excel(uploaded_file.getbuffer())
             

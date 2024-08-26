@@ -137,7 +137,7 @@ if selected == 3:
         # Display the data dimensions
         st.write(f"Data shape: {data.shape}")
 
-        sac.divider(label='-', icon='', align='center', color='gray')
+        sac.divider(label='Table', icon='Table', align='center', color='gray')
         
         # Display the data table
         st.write("Data Table:")

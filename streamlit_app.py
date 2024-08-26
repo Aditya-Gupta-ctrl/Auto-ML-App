@@ -104,7 +104,7 @@ if selected == 3:
     st.header("Data Ingestion")
     
     # Create a file uploader
-    st.markdown("<div style='border: 1px solid #ddd; padding: 10px; border-radius: 10px; background-color: #f9f9f9'>"
+    st.markdown("<div style='border: 1px solid #000000; padding: 10px; border-radius: 10px; background-color: #f9f9f9'>"
                "<h5>Upload a File</h5>", unsafe_allow_html=True)
     
     uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)

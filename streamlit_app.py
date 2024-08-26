@@ -400,8 +400,8 @@ if selected == 6:
 if selected == 8:
     st.header("About")
 
-        # Create a container with a rounded corner box border
-        st.markdown("<div style='border: 1px solid #000000; padding: 20px; border-radius: 20px; background-color: #f9f9f9'>", unsafe_allow_html=True)
+    # Create a container with a rounded corner box border
+    st.markdown("<div style='border: 1px solid #000000; padding: 20px; border-radius: 20px; background-color: #f9f9f9'>", unsafe_allow_html=True)
         
         st.write("This is a machine learning model that allows you to upload your dataset, select the target column, and train a simple linear regression model. The model will then make predictions on the uploaded data.")
     

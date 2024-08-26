@@ -433,7 +433,7 @@ if selected == 8:
 
     st.write("If you want to train multiple models at once, you can do so in the 'Auto Train ML Model' tab. Simply upload a file and select the target column. The following models will be trained:")
 
-    Auto Train ML Model = [
+    features = [
         "Linear Regression",
         "Decision Tree",
         "AdaBoost",
@@ -441,7 +441,7 @@ if selected == 8:
         "XG Boost"
     ]
 
-    for feature in Auto Train ML Model:
+    for feature in features:
         st.write(f"* {feature}")
 
     

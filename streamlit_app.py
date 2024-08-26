@@ -401,37 +401,76 @@ if selected == 6:
 if selected == 8:
     st.header("About")
 
-        
-    st.write("This is a machine learning model that allows you to upload your dataset, select the target column, and train a simple linear regression model. The model will then make predictions on the uploaded data.")
+    st.markdown("""
+    <style>
+    .box {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="box">
+    This is a machine learning model that allows you to upload your dataset, select the target column, and train a simple linear regression model. The model will then make predictions on the uploaded data.
+    </div>
+    """, unsafe_allow_html=True)
 
     st.subheader("Data Ingestion")
 
-    st.write("To ingest data, simply upload a CSV or Excel file using the file uploader. The uploaded file will be stored in the 'uploads' directory. The file name and path will be displayed once the file has been uploaded successfully.")
+    st.markdown("""
+    <div class="box">
+    To ingest data, simply upload a CSV or Excel file using the file uploader. The uploaded file will be stored in the 'uploads' directory. The file name and path will be displayed once the file has been uploaded successfully.
+    </div>
+    """, unsafe_allow_html=True)
 
     st.subheader("Target Column Selection")
 
-    st.write("After uploading the dataset, select the target column from the dropdown menu. The feature columns will be automatically selected based on the target column.")
+    st.markdown("""
+    <div class="box">
+    After uploading the dataset, select the target column from the dropdown menu. The feature columns will be automatically selected based on the target column.
+    </div>
+    """, unsafe_allow_html=True)
 
     st.subheader("Model Training")
 
-    st.write("Once the target column has been selected, click the 'Train Model' button to train the model. The model will be trained using a simple linear regression algorithm.")
+    st.markdown("""
+    <div class="box">
+    Once the target column has been selected, click the 'Train Model' button to train the model. The model will be trained using a simple linear regression algorithm.
+    </div>
+    """, unsafe_allow_html=True)
 
     st.subheader("Predictions")
 
-    st.write("After training the model, you can get predictions on your uploaded data. The predictions will be displayed along with the accuracy score (R-squared) and the Mean Squared Error (MSE).")
-    st.write("Note: The accuracy score (R-squared) measures the proportion of the variance in the dependent variable that is predictable from the independent variable(s). The Mean Squared Error (MSE) measures the average squared difference between the actual and predicted values. A lower MSE indicates a better fit.")
+    st.markdown("""
+    <div class="box">
+    After training the model, you can get predictions on your uploaded data. The predictions will be displayed along with the accuracy score (R-squared) and the Mean Squared Error (MSE).
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="box">
+    Note: The accuracy score (R-squared) measures the proportion of the variance in the dependent variable that is predictable from the independent variable(s). The Mean Squared Error (MSE) measures the average squared difference between the actual and predicted values. A lower MSE indicates a better fit.
+    </div>
+    """, unsafe_allow_html=True)
 
     st.subheader("Data Transformation")
 
-    st.write("If you need to transform your data before training the model, you can do so in the 'Data Transformation' tab. Simply upload a file and select the columns to remove. The updated data will be displayed along with the updated data dimensions.")
+    st.markdown("""
+    <div class="box">
+    If you need to transform your data before training the model, you can do so in the 'Data Transformation' tab. Simply upload a file and select the columns to remove. The updated data will be displayed along with the updated data dimensions.
+    </div>
+    """, unsafe_allow_html=True)
 
     st.subheader("Auto Train ML Model")
 
-    st.write("If you want to train multiple models at once, you can do so in the 'Auto Train ML Model' tab. Simply upload a file and select the target column. The following models will be trained:")
-
-    st.subheader("Auto Train ML Model")
-
-    st.write("If you want to train multiple models at once, you can do so in the 'Auto Train ML Model' tab. Simply upload a file and select the target column. The following models will be trained:")
+    st.markdown("""
+    <div class="box">
+    If you want to train multiple models at once, you can do so in the 'Auto Train ML Model' tab. Simply upload a file and select the target column. The following models will be trained:
+    </div>
+    """, unsafe_allow_html=True)
 
     features = [
         "Linear Regression",
@@ -442,14 +481,25 @@ if selected == 8:
     ]
 
     for feature in features:
-        st.write(f"* {feature}")
+        st.markdown("""
+        <div class="box">
+        * {}
+        </div>
+        """.format(feature), unsafe_allow_html=True)
 
-    st.write("The predictions, R-squared score, and Mean Squared Error (MSE) will be displayed for each model.")
-
+    st.markdown("""
+    <div class="box">
+    The predictions, R-squared score, and Mean Squared Error (MSE) will be displayed for each model.
+    </div>
+    """, unsafe_allow_html=True)
 
     st.subheader("Freeze the Learning")
 
-    st.write("If you want to freeze the learning, you can do so in the 'Freeze the Learning' tab. Simply upload a file and select the target column. The following models will be trained:")
+    st.markdown("""
+    <div class="box">
+    If you want to freeze the learning, you can do so in the 'Freeze the Learning' tab. Simply upload a file and select the target column. The following models will be trained:
+    </div>
+    """, unsafe_allow_html=True)
 
     featuress = [
         "Linear Regression",
@@ -460,13 +510,22 @@ if selected == 8:
     ]
 
     for feature in featuress:
-        st.write(f"* {feature}")
+        st.markdown("""
+        <div class="box">
+        * {}
+        </div>
+        """.format(feature), unsafe_allow_html=True)
 
-    st.write("The predictions, R-squared score, and Mean Squared Error (MSE) will be displayed for each model. However, the models will not be updated even if new data is uploaded.")
-    
+    st.markdown("""
+    <div class="box">
+    The predictions, R-squared score, and Mean Squared Error (MSE) will be displayed for each model. However, the models will not be updated even if new data is uploaded.
+    </div>
+    """, unsafe_allow_html=True)
 
     st.subheader("Conclusion")
 
-    st.write("This ML model allows you to quickly upload and analyze your dataset, select the target column, and train a simple")
-
-
+    st.markdown("""
+    <div class="box">
+    This ML model allows you to quickly upload and analyze your dataset, select the target column, and train a simple.
+    </div>
+    """,unsafe_allow_html=True)

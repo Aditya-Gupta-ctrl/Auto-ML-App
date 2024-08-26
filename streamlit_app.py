@@ -271,9 +271,9 @@ if selected == 4:
         if uploaded_file.size > 0:
             # Load the uploaded data
             if uploaded_file.name.endswith('.csv'):
-                data = pd.read_csv(uploaded_file)
+                data = pd.read_csv(uploaded_file.getbuffer())
             elif uploaded_file.name.endswith('.xlsx'):
-                data = pd.read_excel(uploaded_file)
+                data = pd.read_excel(uploaded_file.getbuffer())
             
             # Display the data dimensions
             st.write(f"Original Data Shape: {data.shape}")

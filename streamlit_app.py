@@ -481,11 +481,8 @@ if selected == 8:
     ]
 
     for feature in features:
-        st.markdown("""
-        <div class="box">
-        * {}
-        </div>
-        """.format(feature), unsafe_allow_html=True)
+        st.write(f"* {feature}")
+
 
     st.markdown("""
     <div class="box">
@@ -510,11 +507,7 @@ if selected == 8:
     ]
 
     for feature in featuress:
-        st.markdown("""
-        <div class="box">
-        * {}
-        </div>
-        """.format(feature), unsafe_allow_html=True)
+        st.write(f"* {feature}")
 
     st.markdown("""
     <div class="box">

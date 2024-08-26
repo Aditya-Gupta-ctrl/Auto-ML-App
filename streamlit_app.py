@@ -272,9 +272,12 @@ if selected == 4:
         if uploaded_file.size > 0:
             # Load the uploaded data
             if uploaded_file.name.endswith('.csv'):
-                data = pd.read_csv(uploaded_file)
+                bytes_data = uploaded_file.getbuffer()
+                string_io = io.StringIO(bytes_data.decode('utf-8'))
+                data = pd.read_csv(string_io)
             elif uploaded_file.name.endswith('.xlsx'):
-                data = pd.read_excel(uploaded_file)
+                bytes_data = uploaded_file.getbuffer()
+                data = pd.read_excel(bytes_data)
             
             # Display the data dimensions
             st.write(f"Original Data Shape: {data.shape}")
@@ -302,6 +305,8 @@ if selected == 4:
             st.write("The uploaded file is empty.")
     else:
         st.write("Please upload a file first.")
+
+
 
 # Freeze the Learning tab
 if selected == 6:

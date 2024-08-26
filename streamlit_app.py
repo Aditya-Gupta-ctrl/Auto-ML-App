@@ -163,6 +163,8 @@ elif selected == 3:
         data = load_data(st.session_state.uploaded_file)
         if data is not None:
             st.write("File uploaded successfully!")
+            st.write("Data preview:")
+            st.dataframe(data.head(10))  # Show the first 10 rows of the data
         else:
             st.write("Error loading data. Please check the file format.")
     else:

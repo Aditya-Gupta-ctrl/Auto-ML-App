@@ -264,6 +264,7 @@ if selected == 3:
             st.write("Predictions:")
             st.write(y_pred)
 
+
 # Data Transformation tab
 if selected == 4:
     st.header("Data Transformation")
@@ -310,6 +311,12 @@ if selected == 4:
             st.write("The uploaded file is empty.")
     else:
         st.write("Please upload a file first.")
+
+
+
+#Auto Train ML Model Tab
+if selected == 5:
+    st.header("Auto Traim ML Model")
 
 
 

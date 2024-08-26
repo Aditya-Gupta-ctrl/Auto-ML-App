@@ -273,8 +273,8 @@ if selected == 4:
             # Load the uploaded data
             if uploaded_file.name.endswith('.csv'):
                 bytes_data = uploaded_file.getbuffer()
-                string_io = io.StringIO(bytes_data.decode('utf-8'))
-                data = pd.read_csv(string_io)
+                text_io = io.TextIOWrapper(io.BytesIO(bytes_data))
+                data = pd.read_csv(text_io)
             elif uploaded_file.name.endswith('.xlsx'):
                 bytes_data = uploaded_file.getbuffer()
                 data = pd.read_excel(bytes_data)

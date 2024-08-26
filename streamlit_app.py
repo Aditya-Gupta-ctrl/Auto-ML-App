@@ -15,21 +15,21 @@ from sklearn.ensemble import AdaBoostRegressor
 from sklearn.model_selection import train_test_split
 
 # Function to load data
-def load_data(file_path):
+def load_data(file):
     """
     Load data from a CSV or Excel file.
 
     Args:
-        file_path (str): The path to the file.
+        file (UploadedFile): The uploaded file.
 
     Returns:
         pd.DataFrame: The loaded data.
     """
     try:
-        if file_path.endswith('.csv'):
-            return pd.read_csv(file_path)
-        elif file_path.endswith('.xlsx'):
-            return pd.read_excel(file_path)
+        if file.name.endswith('.csv'):
+            return pd.read_csv(file)
+        elif file.name.endswith('.xlsx'):
+            return pd.read_excel(file)
         else:
             st.error("Please upload a CSV or Excel file.")
             return None
@@ -148,7 +148,11 @@ elif selected == 3:
     file_uploader = st.file_uploader("Upload a CSV or Excel file", type=['csv', 'xlsx'])
     if file_uploader is not None:
         st.session_state.uploaded_file = file_uploader
-        st.write("File uploaded successfully!")
+        data = load_data(st.session_state.uploaded_file)
+        if data is not None:
+            st.write("File uploaded successfully!")
+        else:
+            st.write("Error loading data. Please check the file format.")
     else:
         st.write("Please upload a CSV or Excel file.")
 
@@ -156,8 +160,7 @@ elif selected == 3:
 elif selected == 4:
     st.title("Data Transformation")
     if st.session_state.uploaded_file is not None:
-        file_path = st.session_state.uploaded_file.name
-        data = load_data(file_path)
+        data = load_data(st.session_state.uploaded_file)
         if data is not None:
             st.write("Data loaded successfully!")
             target_column = st.selectbox("Select the target column", data.columns)
@@ -172,8 +175,7 @@ elif selected == 4:
 elif selected == 5:
     st.title("Auto Train ML Model")
     if st.session_state.uploaded_file is not None:
-        file_path = st.session_state.uploaded_file.name
-        data = load_data(file_path)
+        data = load_data(st.session_state.uploaded_file)
         if data is not None:
             target_column = st.selectbox("Select the target column", data.columns)
             X, y = preprocess_data(data, target_column)
@@ -195,8 +197,7 @@ elif selected == 5:
 elif selected == 6:
     st.title("Freeze the Learning")
     if st.session_state.uploaded_file is not None:
-        file_path = st.session_state.uploaded_file.name
-        data = load_data(file_path)
+        data = load_data(st.session_state.uploaded_file)
         if data is not None:
             target_column = st.selectbox("Select the target column", data.columns)
             X, y = preprocess_data(data, target_column)

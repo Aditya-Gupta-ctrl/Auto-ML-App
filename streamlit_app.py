@@ -260,7 +260,7 @@ if selected == 3:
                 st.markdown(f"""
                 <div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;">
                     <h5>R*2 Score</h5>
-                    <p>Accuracy Score (R-squared):<div background: #f1f1f1;style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;"> {r2:.2f}</div></p>
+                    <p>Accuracy Score (R-squared):<div background-color: #f1f1f1;;style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;"> {r2:.2f}</div></p>
                     <h5>MSE Score</h5>
                     <p>Mean Squared Error (MSE): {mse:.2f}</p>
                 </div>

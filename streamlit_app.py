@@ -525,3 +525,9 @@ if selected == 8:
     This ML model allows you to quickly upload and analyze your dataset, select the target column, and train a simple.
     </div>
     """,unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="box">
+    st.header("lund lele")
+    </div>
+    """,unsafe_allow_html=True)

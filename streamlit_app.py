@@ -269,7 +269,7 @@ if selected == 3:
                     <h5>MSE Score</h5>
                     <p>Mean Squared Error (MSE): {mse:.2f}</p>
                     
-                    <h4>Prediction Values:</h4>
+                    <p>Prediction Values:</p>
                     <p>{y_pred}</p>
                 </div>
                 """, unsafe_allow_html=True)

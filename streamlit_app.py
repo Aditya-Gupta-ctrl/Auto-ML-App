@@ -245,11 +245,7 @@ if selected == 3:
             r2 = r2_score(y, y_pred)
         
             # Calculate the Mean Squared Error (MSE)
-            mse = mean_squared_error(y, y_pred)
-        
-            # Calculate the accuracy score
-            accuracy = r2_score(y, y_pred)
-            
+            mse = mean_squared_error(y, y_pred)            
             
             # Display the accuracy score (R-squared)
             st.subheader("R2 Score")
@@ -268,8 +264,8 @@ if selected == 3:
             with st.container():
                 st.markdown(f"""
                 <div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;">
-                    <h4>Prediction Metrics</h4>
-                    <p>Accuracy Score (R-squared): {r2_score(y, y_pred):.2f}</p>
+                    <h5>Prediction Metrics</h5>
+                    <p>Accuracy Score (R-squared): {r2:.2f}</p>
                     <p>Prediction Values:</p>
                     <p>{y_pred}</p>
                 </div>

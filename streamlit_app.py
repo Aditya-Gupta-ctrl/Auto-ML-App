@@ -147,7 +147,7 @@ if selected == 3:
         st.write("Data Table:")
         st.write(data.head(10))  # display the first 10 rows of the data
 
-        st.header("Linear Regression MOdel")
+        st.header("Linear Regression Model")
 
         
         # Define the model file path

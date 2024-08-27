@@ -272,7 +272,7 @@ if selected == 4:
         uploaded_file = st.session_state.uploaded_file
         
         # Check if the uploaded file is not empty
-        if uploaded_file.size > 0:
+        if uploaded_file is not None:
             # Load the uploaded data
             if uploaded_file.name.endswith('.csv'):
                 bytes_data = uploaded_file.getbuffer()

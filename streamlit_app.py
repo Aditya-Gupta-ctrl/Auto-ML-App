@@ -526,8 +526,8 @@ if selected == 8:
     </div>
     """,unsafe_allow_html=True)
 
-    st.header(st.markdown("""
+    st.markdown("""
     <div class="box">
-    ("lund lele")
+    lund lele
     </div>
-    """,unsafe_allow_html=True))
+    """,unsafe_allow_html=True)

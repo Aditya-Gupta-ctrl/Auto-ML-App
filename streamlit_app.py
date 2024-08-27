@@ -527,7 +527,7 @@ if selected == 8:
     """,unsafe_allow_html=True)
 
     st.markdown("""
-    <div class="box",align=center>
+    <div class="box">
     lund lele
     </div>
     """,unsafe_allow_html=True)

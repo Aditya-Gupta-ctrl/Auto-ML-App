@@ -407,7 +407,7 @@ if selected == 8:
     st.markdown("""
     <style>
     .box {
-        border: 1px solid #000000;
+        border: 1px solid #B8B8B8;
         border-radius: 10px;
         padding: 10px;
         margin-bottom: 20px;

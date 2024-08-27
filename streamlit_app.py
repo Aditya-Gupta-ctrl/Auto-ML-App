@@ -247,6 +247,9 @@ if selected == 3:
             # Calculate the Mean Squared Error (MSE)
             mse = mean_squared_error(y, y_pred)
         
+            # Calculate the accuracy score
+            accuracy = r2_score(y, y_pred)
+            
             
             # Display the accuracy score (R-squared)
             st.subheader("R2 Score")
@@ -255,6 +258,9 @@ if selected == 3:
             # Display the Mean Squared Error (MSE)
             st.subheader("MSE Score")
             st.write(f"Mean Squared Error (MSE): {mse:.2f}")
+
+            #Display the Accuracy score 
+            st.write(f"Accuracy Score (R-squared): {accuracy:.2f}")
 
             # Display the predictions
             st.subheader("Prediction Result")

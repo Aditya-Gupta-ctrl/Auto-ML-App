@@ -248,25 +248,28 @@ if selected == 3:
             mse = mean_squared_error(y, y_pred)            
             
             # Display the accuracy score (R-squared)
-            st.subheader("R2 Score")
-            st.write(f"R-squared: {r2:.2f}")
+            #st.subheader("R2 Score")
+            #st.write(f"R-squared: {r2:.2f}")
     
             # Display the Mean Squared Error (MSE)
-            st.subheader("MSE Score")
-            st.write(f"Mean Squared Error (MSE): {mse:.2f}")
+            #st.subheader("MSE Score")
+            #st.write(f"Mean Squared Error (MSE): {mse:.2f}")
 
             # Display the predictions
-            st.subheader("Prediction Result")
-            st.write("Predictions:")
-            st.write(y_pred)
+            #st.subheader("Prediction Result")
+            #st.write("Predictions:")
+            #st.write(y_pred)
 
             # Create a container with a bordered color
             with st.container():
                 st.markdown(f"""
                 <div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;">
-                    <h5>Prediction Metrics</h5>
+                    <h5>R*2 Score</h5>
                     <p>Accuracy Score (R-squared): {r2:.2f}</p>
-                    <p>Prediction Values:</p>
+                    <h5>MSE Score</h5>
+                    <p>Mean Squared Error (MSE): {mse:.2f}</p>
+                    
+                    <h4>Prediction Values:</h4>
                     <p>{y_pred}</p>
                 </div>
                 """, unsafe_allow_html=True)

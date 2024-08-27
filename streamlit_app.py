@@ -259,9 +259,6 @@ if selected == 3:
             st.subheader("MSE Score")
             st.write(f"Mean Squared Error (MSE): {mse:.2f}")
 
-            #Display the Accuracy score 
-            st.write(f"Accuracy Score (R-squared): {accuracy:.2f}")
-
             # Display the predictions
             st.subheader("Prediction Result")
             st.write("Predictions:")

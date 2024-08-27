@@ -305,7 +305,7 @@ if selected == 4:
             # Store the updated data in the session state
             st.session_state.data = data
         else:
-            st.write("The uploaded file is empty.")
+            st.error("Please upload a file in the Data Ingestion section")
     else:
         st.write("Please upload a file first.")
 

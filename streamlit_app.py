@@ -264,7 +264,17 @@ if selected == 3:
             st.write("Predictions:")
             st.write(y_pred)
 
-   
+            # Create a container with a bordered color
+            with st.container():
+                st.markdown(f"""
+                <div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;">
+                    <h4>Prediction Metrics</h4>
+                    <p>Accuracy Score (R-squared): {r2_score(y, y_pred):.2f}</p>
+                    <p>Prediction Values:</p>
+                    <p>{y_pred}</p>
+                </div>
+                """, unsafe_allow_html=True)
+
 
 
 

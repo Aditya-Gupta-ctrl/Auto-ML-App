@@ -199,7 +199,12 @@ if selected == 4:
             st.write(data.head(10))  # display the first 10 rows of the data
             
             # Add a feature to remove columns
-            columns_to_remove = st.multiselect("Select columns to remove:", data.columns)
+            if 'selected_columns' not in st.session_state:
+                st.session_state.selected_columns = []
+            
+            columns_to_remove = st.multiselect("Select columns to remove:", data.columns, key='columns_to_remove', default=st.session_state.selected_columns)
+            st.session_state.selected_columns = columns_to_remove
+            
             if columns_to_remove:
                 data = data.drop(columns=columns_to_remove)
                 st.write("Columns removed successfully!")

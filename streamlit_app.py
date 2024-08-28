@@ -103,8 +103,6 @@ uploaded_file = None
 # Data Ingestion tab
 if selected == 3:
     st.header("Data Ingestion")
-
-
     
     # Create a file uploader
     uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
@@ -113,12 +111,9 @@ if selected == 3:
     reset_button = st.button("Reset")
 
     if reset_button:
-        # Reset the uploaded file and other session state variables
-        st.session_state.uploaded_file = None
-        st.session_state.data = None
-        #st.experimental_rerun()  # Rerun the entire app
-        st.experimental_memo.clear()  # Clear the memo cache
-        st.experimental_singleton.clear()  # Clear the singleton cache
+    # Reset the uploaded file and other session state variables
+    for key in st.session_state.keys():
+        del st.session_state[key]
 
     
     if uploaded_file:

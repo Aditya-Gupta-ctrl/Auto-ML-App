@@ -108,6 +108,14 @@ if selected == 3:
     
     # Create a file uploader
     uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
+
+    # Add a reset button
+    reset_button = st.button("Reset")
+
+    if reset_button:
+        # Reset the uploaded file and other session state variables
+        st.session_state.uploaded_file = None
+        st.session_state.data = None
     
     if uploaded_file:
         # Store the uploaded file in the session state
@@ -138,13 +146,7 @@ if selected == 3:
         elif file_name.endswith('.xlsx'):
             data = pd.read_excel(file_path)
 
-        # Add a reset button
-        reset_button = st.button("Reset")
-    
-        if reset_button:
-            # Reset the uploaded file and other session state variables
-            st.session_state.uploaded_file = None
-            st.session_state.data = None
+
 
         with st.container():
             st.markdown(f"""

@@ -279,21 +279,17 @@ if selected == 3:
             st.subheader("Prediction Result")
             st.write("Predictions:")
             
-            # Divide the predictions into 10 columns
+            # Divide the predictions into 1 column
             num_cols = 1
-            pred_cols = [y_pred[i:i + num_cols] for i in range(0, len(y_pred), num_cols)]
             
-            # Create 10 columns
+            # Create 1 column
             cols = st.columns(num_cols)
             
-            # Create a pandas DataFrame for each column
+            # Create a pandas Series for each column
             import pandas as pd
             for i, col in enumerate(cols):
-                #col_df = pd.DataFrame([y_pred[i:i + num_cols] for i in range(0, len(y_pred), num_cols)]).T
-                #col_df.columns = [f"Column {i+1}" for i in range(col_df.shape[1])]
-                col_df = pd.DataFrame([y_pred[i:i + num_cols] for i in range(0, len(y_pred), num_cols)]).T
-                single_col_df = col_df.iloc[:, 0]
-                col.write(col_df)
+                single_col_df = pd.Series(y_pred[i:i + num_cols][0])
+                col.write(single_col_df)
     
             #st.subheader("Prediction Result")
             #st.write("Predictions:")

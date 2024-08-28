@@ -280,7 +280,7 @@ if selected == 3:
             st.write("Predictions:")
             
             # Create multiple columns
-            num_cols = 3  # adjust the number of columns as needed
+            num_cols = 7  # adjust the number of columns as needed
             cols = st.columns(num_cols)
             
             # Create a pandas DataFrame

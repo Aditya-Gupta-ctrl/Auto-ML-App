@@ -101,10 +101,6 @@ if selected == 0:
 uploaded_file = None
 
 
-
-    
-
-
 # Data Ingestion tab
 if selected == 3:
     st.header("Data Ingestion")
@@ -120,44 +116,41 @@ if selected == 3:
         for key in st.session_state.keys():
             del st.session_state[key]
 
-    @st.experimental_memo
-    def load_uploaded_file(uploaded_file):
-        if uploaded_file:
-            # Store the uploaded file in the session state
-            st.session_state.uploaded_file = uploaded_file
+    if uploaded_file:
+        # Store the uploaded file in the session state
+        st.session_state.uploaded_file = uploaded_file
 
-            # Create the uploads directory if it doesn't exist
-            uploads_dir = "uploads"
-            if not os.path.exists(uploads_dir):
-                os.makedirs(uploads_dir)
+        # Create the uploads directory if it doesn't exist
+        uploads_dir = "uploads"
+        if not os.path.exists(uploads_dir):
+            os.makedirs(uploads_dir)
 
-            # Handle the uploaded file
-            file_path = os.path.join(uploads_dir, uploaded_file.name)
-            with open(file_path, "wb") as f:
-                f.write(uploaded_file.read())
-            st.success("File uploaded successfully!")
+        # Handle the uploaded file
+        file_path = os.path.join(uploads_dir, uploaded_file.name)
+        with open(file_path, "wb") as f:
+            f.write(uploaded_file.read())
+        st.success("File uploaded successfully!")
 
-            # Get the file name and path
-            file_name = uploaded_file.name
-            file_path = file_path
+        # Get the file name and path
+        file_name = uploaded_file.name
+        file_path = file_path
 
-            # Display the file name and path
-            st.write(f"File name: {file_name}")
-            st.write(f"File path: {file_path}")
+        # Display the file name and path
+        st.write(f"File name: {file_name}")
+        st.write(f"File path: {file_path}")
 
-            # Load the uploaded data
-            if file_name.endswith('.csv'):
-                data = pd.read_csv(file_path)
-            elif file_name.endswith('.xlsx'):
-                data = pd.read_excel(file_path)
+        # Load the uploaded data
+        if file_name.endswith('.csv'):
+            data = pd.read_csv(file_path)
+        elif file_name.endswith('.xlsx'):
+            data = pd.read_excel(file_path)
 
-            return data
-        else:
-            return None
+        # Store the loaded data in the session state
+        st.session_state.data = data
 
-    data = load_uploaded_file(uploaded_file)
+    if 'data' in st.session_state:
+        data = st.session_state.data
 
-    if data is not None:
         with st.container():
             st.markdown(f"""
             <div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;">

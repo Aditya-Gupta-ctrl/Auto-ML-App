@@ -350,26 +350,23 @@ if selected == 4:
 
 
 
-#Auto Train ML Model Tab
+# Auto Train ML Model Tab
 if selected == 5:
-    st.header("Auto Traim ML Model")
+    st.header("Auto Train ML Model")
 
-    if st.session_state.uploaded_file is None:
-        st.error("Please upload a file in the Data Ingestion section")
-    else:
-        # Load the uploaded file
-        file_path = "uploads/" + st.session_state.uploaded_file.name
-        if st.session_state.uploaded_file.name.endswith('.csv'):
-            data = pd.read_csv(file_path)
-        elif st.session_state.uploaded_file.name.endswith('.xlsx'):
-            data = pd.read_excel(file_path)
-
-        # Display the uploaded data
-        st.write("Uploaded Data:")
+    if 'data' in st.session_state:
+        # Load the updated data from the session state
+        data = st.session_state.data
+        st.write("Updated Data:")
         st.write(data)
+    else:
+        st.error("Please upload a file and transform the data in the Data Transformation section")
 
-        # Get the target column
+    # Get the target column
+    if 'data' in st.session_state:
         target_column = st.selectbox("Select the target column", data.columns)
+    else:
+        st.error("No data available for training")
 
         
         

@@ -291,7 +291,7 @@ if selected == 3:
             cols = st.columns(num_cols)
             
             # Display the predictions in 10 columns side by side
-            for i, col in enumerate(pred_cols[0]):
+            for i, col in enumerate(row):
                 cols[i].write(col)
     
             #st.subheader("Prediction Result")

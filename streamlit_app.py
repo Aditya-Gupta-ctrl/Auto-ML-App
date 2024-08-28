@@ -274,11 +274,23 @@ if selected == 3:
                     <p>Mean Squared Error (MSE):<div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;"> {mse:.2f}</div></p>
                 </div>
                 """, unsafe_allow_html=True)
-                
+
             # Display the predictions
             st.subheader("Prediction Result")
             st.write("Predictions:")
-            st.write(y_pred)
+            
+            # Divide the predictions into 10 columns
+            num_cols = 10
+            pred_cols = [y_pred[i:i + num_cols] for i in range(0, len(y_pred), num_cols)]
+            
+            # Display the predictions in 10 columns
+            for i, col in enumerate(pred_cols):
+                st.write(f"Column {i+1}:")
+                st.write(col)
+    
+            #st.subheader("Prediction Result")
+            #st.write("Predictions:")
+            #st.write(y_pred)
 
 
 

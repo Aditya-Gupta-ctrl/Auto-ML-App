@@ -279,10 +279,6 @@ if selected == 3:
             st.subheader("Prediction Result")
             st.write("Predictions:")
             
-            # Display the predictions
-            st.subheader("Prediction Result")
-            st.write("Predictions:")
-            
             # Divide the predictions into 10 columns
             num_cols = 10
             pred_cols = [y_pred[i:i + num_cols] for i in range(0, len(y_pred), num_cols)]
@@ -290,10 +286,13 @@ if selected == 3:
             # Create 10 columns
             cols = st.columns(num_cols)
             
+            # Transpose the pred_cols list
+            transposed_pred_cols = list(zip(*pred_cols))
+            
             # Create a pandas DataFrame for each column
             import pandas as pd
             for i, col in enumerate(cols):
-                col_df = pd.DataFrame([row[i] for row in pred_cols])
+                col_df = pd.DataFrame([val for val in transposed_pred_cols[i]])
                 col.write(col_df)
     
             #st.subheader("Prediction Result")

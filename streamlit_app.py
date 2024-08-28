@@ -166,7 +166,8 @@ if selected == 3:
 
         # Display the data table
         st.write("Data Table:")
-        st.write(data.head(10))  # display the first 10 rows of the data
+        #st.write(data.head(10))    # display the first 10 rows of the data
+        st.write(data)
 
 
 # Data Transformation tab

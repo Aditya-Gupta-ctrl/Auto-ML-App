@@ -100,70 +100,7 @@ if selected == 0:
     
 uploaded_file = None
 
-# Data Ingestion tab
-if selected == 3:
-    st.header("Data Ingestion")
-    
-    # Create a file uploader
-    uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
 
-    # Add a reset button
-    reset_button = st.button("Reset")
-
-    if reset_button:
-        # Reset the uploaded file and other session state variables
-        for key in st.session_state.keys():
-            del st.session_state[key]
-
-    
-    if uploaded_file:
-        # Store the uploaded file in the session state
-        st.session_state.uploaded_file = uploaded_file
-        
-        # Create the uploads directory if it doesn't exist
-        uploads_dir = "uploads"
-        if not os.path.exists(uploads_dir):
-            os.makedirs(uploads_dir)
-    
-        # Handle the uploaded file
-        file_path = os.path.join(uploads_dir, uploaded_file.name)
-        with open(file_path, "wb") as f:
-            f.write(uploaded_file.read())
-        st.success("File uploaded successfully!")
-    
-        # Get the file name and path
-        file_name = uploaded_file.name
-        file_path = file_path
-    
-        # Display the file name and path
-        st.write(f"File name: {file_name}")
-        st.write(f"File path: {file_path}")
-    
-        # Load the uploaded data
-        if file_name.endswith('.csv'):
-            data = pd.read_csv(file_path)
-        elif file_name.endswith('.xlsx'):
-            data = pd.read_excel(file_path)
-
-
-
-        with st.container():
-            st.markdown(f"""
-            <div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;">
-                <h5>Data Dimension</h5>
-                <p>Accuracy Data Shape:<div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;"> {data.shape}</div></p>    
-            </div>
-            """, unsafe_allow_html=True)
-
-        
-        # Display the data dimensions
-        #st.write(f"Data shape: {data.shape}")
-
-        sac.divider(label='Table', icon='Table', align='center', color='gray')
-        
-        # Display the data table
-        st.write("Data Table:")
-        st.write(data.head(10))  # display the first 10 rows of the data
 
     
 

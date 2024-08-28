@@ -359,8 +359,35 @@ if selected == 5:
         data = st.session_state.data
         st.write("Updated Data:")
         st.write(data)
+
+        # Get the target column
+        target_column = st.selectbox("Select the target column", data.columns)
+
+        # Train a simple linear regression model
+        X = data.drop(target_column, axis=1)
+        y = data[target_column]
+
+        model = LinearRegression()
+        model.fit(X, y)
+
+        # Make predictions
+        y_pred = model.predict(X)
+
+        # Display the predictions
+        st.subheader("Prediction Result")
+        st.write("Predictions:")
+        st.write(y_pred)
+
+        # Display the accuracy score (R-squared)
+        r2 = r2_score(y, y_pred)
+        st.write(f"R-squared: {r2:.2f}")
+
+        # Display the Mean Squared Error (MSE)
+        mse = mean_squared_error(y, y_pred)
+        st.write(f"Mean Squared Error (MSE): {mse:.2f}")
     else:
         st.error("Please upload a file and transform the data in the Data Transformation section")
+
 
     # Get the target column
     #if 'data' in st.session_state:

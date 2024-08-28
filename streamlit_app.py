@@ -280,7 +280,7 @@ if selected == 3:
             st.write("Predictions:")
             
             # Divide the predictions into 10 columns
-            num_cols = 10
+            num_cols = 1
             pred_cols = [y_pred[i:i + num_cols] for i in range(0, len(y_pred), num_cols)]
             
             # Create 10 columns

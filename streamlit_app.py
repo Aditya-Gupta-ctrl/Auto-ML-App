@@ -286,22 +286,11 @@ if selected == 3:
             # Create 10 columns
             cols = st.columns(num_cols)
             
-            # Transpose the pred_cols list
-            transposed_pred_cols = list(zip(*pred_cols))
-            
             # Create a pandas DataFrame for each column
             import pandas as pd
             for i, col in enumerate(cols):
-                data = [sublist for sublist in transposed_pred_cols[i]]
-                if data:  # Check if data is not empty
-                    if all(data) and data[0]:  # Check if all sublists in data are not empty and data[0] is not empty
-                        num_predictions = len(data[0])  # Get the number of predictions
-                        col_df = pd.DataFrame(data, columns=[f"Prediction {j+1}" for j in range(num_predictions)])
-                        col.write(col_df)
-                    else:
-                        col.write("No predictions available")
-                else:
-                    col.write("No predictions available")
+                col_df = pd.DataFrame([row[i] for row in pred_cols])
+                col.write(col_df)
     
             #st.subheader("Prediction Result")
             #st.write("Predictions:")

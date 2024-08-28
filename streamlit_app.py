@@ -138,6 +138,14 @@ if selected == 3:
         elif file_name.endswith('.xlsx'):
             data = pd.read_excel(file_path)
 
+        # Add a reset button
+        reset_button = st.button("Reset")
+    
+        if reset_button:
+            # Reset the uploaded file and other session state variables
+            st.session_state.uploaded_file = None
+            st.session_state.data = None
+
         with st.container():
             st.markdown(f"""
             <div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;">

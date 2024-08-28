@@ -274,24 +274,26 @@ if selected == 3:
                     <p>Mean Squared Error (MSE):<div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;"> {mse:.2f}</div></p>
                 </div>
                 """, unsafe_allow_html=True)
-                        
+                                    
             # Display the predictions
             st.subheader("Prediction Result")
             st.write("Predictions:")
             
-            # Divide the predictions into columns
-            num_cols = 1
-            pred_cols = [y_pred[i:i + num_cols] for i in range(0, len(y_pred), num_cols)]
-            
-            # Create columns
+            # Create multiple columns
+            num_cols = 3  # adjust the number of columns as needed
             cols = st.columns(num_cols)
             
-            # Create a pandas DataFrame for each column
+            # Create a pandas DataFrame
             import pandas as pd
+            df = pd.DataFrame(y_pred)
+            
+            # Divide the DataFrame into chunks for each column
+            chunk_size = len(df) // num_cols
+            chunks = [df.iloc[i:i + chunk_size] for i in range(0, len(df), chunk_size)]
+            
+            # Write each chunk to a column
             for i, col in enumerate(cols):
-                col_df = pd.DataFrame([y_pred[i:i + num_cols] for i in range(0, len(y_pred), num_cols)]).T
-                single_col_df = col_df.iloc[:, 0]
-                col.write(col_df)
+                col.write(chunks[i])
     
             #st.subheader("Prediction Result")
             #st.write("Predictions:")

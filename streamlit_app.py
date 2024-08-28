@@ -294,7 +294,7 @@ if selected == 3:
             for i, col in enumerate(cols):
                 data = [sublist for sublist in transposed_pred_cols[i]]
                 if data:  # Check if data is not empty
-                    if all(data):  # Check if all sublists in data are not empty
+                    if all(data) and data[0]:  # Check if all sublists in data are not empty and data[0] is not empty
                         num_predictions = len(data[0])  # Get the number of predictions
                         col_df = pd.DataFrame(data, columns=[f"Prediction {j+1}" for j in range(num_predictions)])
                         col.write(col_df)

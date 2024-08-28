@@ -289,11 +289,11 @@ if selected == 3:
             # Transpose the pred_cols list
             transposed_pred_cols = list(zip(*pred_cols))
             
-            # Create a pandas DataFrame for each column
+            # Create a pandas Series for each column
             import pandas as pd
             for i, col in enumerate(cols):
-                col_df = pd.DataFrame([val for val in transposed_pred_cols[i]])
-                col.write(col_df)
+                col_series = pd.Series(transposed_pred_cols[i])
+                col.write(col_series)
     
             #st.subheader("Prediction Result")
             #st.write("Predictions:")

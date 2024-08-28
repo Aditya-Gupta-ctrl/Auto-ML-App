@@ -292,7 +292,8 @@ if selected == 3:
             # Create a pandas DataFrame for each column
             import pandas as pd
             for i, col in enumerate(cols):
-                col_df = pd.DataFrame([val for sublist in transposed_pred_cols[i] for val in sublist], columns=["Predictions"])
+                data = [sublist for sublist in transposed_pred_cols[i]]
+                col_df = pd.DataFrame(data, columns=[f"Prediction {j+1}" for j in range(len(data[0]))])
                 col.write(col_df)
     
             #st.subheader("Prediction Result")

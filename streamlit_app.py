@@ -363,10 +363,10 @@ if selected == 5:
         st.error("Please upload a file and transform the data in the Data Transformation section")
 
     # Get the target column
-    if 'data' in st.session_state:
-        target_column = st.selectbox("Select the target column", data.columns)
-    else:
-        st.error("No data available for training")
+    #if 'data' in st.session_state:
+        #target_column = st.selectbox("Select the target column", data.columns)
+    #else:
+        #st.error("No data available for training")
 
         
         

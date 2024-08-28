@@ -265,13 +265,6 @@ if selected == 3:
             # Calculate the Mean Squared Error (MSE)
             mse = mean_squared_error(y, y_pred)            
             
-            # Display the accuracy score (R-squared)
-            #st.subheader("R2 Score")
-            #st.write(f"R-squared: {r2:.2f}")
-    
-            # Display the Mean Squared Error (MSE)
-            #st.subheader("MSE Score")
-            #st.write(f"Mean Squared Error (MSE): {mse:.2f}")
 
             # Create a container with a bordered color
             with st.container():
@@ -304,9 +297,7 @@ if selected == 3:
             for i, col in enumerate(cols):
                 col.write(chunks[i])
     
-            #st.subheader("Prediction Result")
-            #st.write("Predictions:")
-            #st.write(y_pred)
+
 
 
 

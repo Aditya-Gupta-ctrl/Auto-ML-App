@@ -171,58 +171,75 @@ if selected == 3:
 
 
 
-# Data Transformation tab
-if selected == 4:
-    st.header("Data Transformation")
-    
-    # Check if a file has been uploaded
-    if 'uploaded_file' in st.session_state:
-        # Get the uploaded file
-        uploaded_file = st.session_state.uploaded_file
-        
-        # Check if the uploaded file is not empty
-        if uploaded_file is not None:
-            # Load the uploaded data
-            if uploaded_file.name.endswith('.csv'):
-                bytes_data = uploaded_file.getbuffer()
-                text_io = io.TextIOWrapper(io.BytesIO(bytes_data))
-                data = pd.read_csv(text_io)
-            elif uploaded_file.name.endswith('.xlsx'):
-                bytes_data = uploaded_file.getbuffer()
-                data = pd.read_excel(bytes_data)
-            
-            # Display the data dimensions
-            st.write(f"Original Data Shape: {data.shape}")
-            
-            # Display the data table
-            st.write("Original Data Table:")
-            st.write(data.head(10))  # display the first 10 rows of the data
-            
-            # Add a feature to remove columns
-            if 'selected_columns' not in st.session_state:
-                st.session_state.selected_columns = []
-            
-            columns_to_remove = st.multiselect("Select columns to remove:", data.columns, key='columns_to_remove', default=st.session_state.selected_columns)
-            st.session_state.selected_columns = columns_to_remove
-            
-            if columns_to_remove:
-                data = data.drop(columns=columns_to_remove)
-                st.write("Columns removed successfully!")
-            
-            # Display the updated data dimensions
-            st.write(f"Updated Data Shape: {data.shape}")
-            
-            # Display the updated data table
-            st.write("Updated Data Table:")
-            st.write(data.head(10))  # display the first 10 rows of the updated data
-            
-            # Store the updated data in the session state
-            st.session_state.data = data
-        else:
-            st.error("Please upload a file in the Data Ingestion section")
-    else:
-        st.write("Please upload a file first.")
+# Data Ingestion tab
+if selected == 3:
+    st.header("Data Ingestion")
 
+    # Create a file uploader
+    uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
+
+    # Add a reset button
+    reset_button = st.button("Reset")
+
+    if reset_button:
+        # Reset the uploaded file and other session state variables
+        for key in st.session_state.keys():
+            del st.session_state[key]
+
+    @st.experimental_memo
+    def load_uploaded_file(uploaded_file):
+        if uploaded_file:
+            # Store the uploaded file in the session state
+            st.session_state.uploaded_file = uploaded_file
+
+            # Create the uploads directory if it doesn't exist
+            uploads_dir = "uploads"
+            if not os.path.exists(uploads_dir):
+                os.makedirs(uploads_dir)
+
+            # Handle the uploaded file
+            file_path = os.path.join(uploads_dir, uploaded_file.name)
+            with open(file_path, "wb") as f:
+                f.write(uploaded_file.read())
+            st.success("File uploaded successfully!")
+
+            # Get the file name and path
+            file_name = uploaded_file.name
+            file_path = file_path
+
+            # Display the file name and path
+            st.write(f"File name: {file_name}")
+            st.write(f"File path: {file_path}")
+
+            # Load the uploaded data
+            if file_name.endswith('.csv'):
+                data = pd.read_csv(file_path)
+            elif file_name.endswith('.xlsx'):
+                data = pd.read_excel(file_path)
+
+            return data
+        else:
+            return None
+
+    data = load_uploaded_file(uploaded_file)
+
+    if data is not None:
+        with st.container():
+            st.markdown(f"""
+            <div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;">
+                <h5>Data Dimension</h5>
+                <p>Accuracy Data Shape:<div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;"> {data.shape}</div></p>    
+            </div>
+            """, unsafe_allow_html=True)
+
+        # Display the data dimensions
+        #st.write(f"Data shape: {data.shape}")
+
+        sac.divider(label='Table', icon='Table', align='center', color='gray')
+
+        # Display the data table
+        st.write("Data Table:")
+        st.write(data.head(10))  # display the first 10 rows of the data
 
 
 # Auto Train ML Model Tab

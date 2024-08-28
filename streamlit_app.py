@@ -290,9 +290,11 @@ if selected == 3:
             # Create 10 columns
             cols = st.columns(num_cols)
             
-            # Display the predictions in 10 columns side by side
-            for i, col in enumerate(row):
-                cols[i].write(col)
+            # Create a pandas DataFrame for each column
+            import pandas as pd
+            for i, col in enumerate(cols):
+                col_df = pd.DataFrame([row[i] for row in pred_cols])
+                col.write(col_df)
     
             #st.subheader("Prediction Result")
             #st.write("Predictions:")

@@ -374,7 +374,10 @@ if selected == 5:
             #st.subheader("Prediction Result")
             #st.write("Predictions:")
             #st.write(y_pred)        
-
+    else:
+        st.error("Please upload a file in the Data Ingestion section")
+    #else:
+     #   st.write("Please upload a file first.")
 
         
         

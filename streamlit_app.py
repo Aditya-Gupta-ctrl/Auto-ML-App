@@ -289,8 +289,8 @@ if selected == 3:
             # Create a pandas DataFrame for each column
             import pandas as pd
             for i, col in enumerate(cols):
-                col_df = pd.DataFrame([y_pred[i:i + num_cols] for i in range(0, len(y_pred), num_cols)]).T
-                col_df.columns = [f"Column {i+1}" for i in range(col_df.shape[1])]
+                #col_df = pd.DataFrame([y_pred[i:i + num_cols] for i in range(0, len(y_pred), num_cols)]).T
+                #col_df.columns = [f"Column {i+1}" for i in range(col_df.shape[1])]
                 col_df = pd.DataFrame([y_pred[i:i + num_cols] for i in range(0, len(y_pred), num_cols)]).T
                 single_col_df = col_df.iloc[:, 0]
                 col.write(col_df)

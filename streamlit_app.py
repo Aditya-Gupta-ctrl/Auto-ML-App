@@ -274,7 +274,7 @@ if selected == 3:
                     <p>Mean Squared Error (MSE):<div style="border: 1px solid #b8b8b8; border-radius: 10px; padding: 10px;"> {mse:.2f}</div></p>
                 </div>
                 """, unsafe_allow_html=True)
-            
+                        
             # Display the predictions
             st.subheader("Prediction Result")
             st.write("Predictions:")
@@ -294,7 +294,8 @@ if selected == 3:
             for i, col in enumerate(cols):
                 data = [sublist for sublist in transposed_pred_cols[i]]
                 if data:  # Check if data is not empty
-                    col_df = pd.DataFrame(data, columns=[f"Prediction {j+1}" for j in range(len(data[0]))])
+                    num_predictions = len(data[0]) if data[0] else 0  # Get the number of predictions
+                    col_df = pd.DataFrame(data, columns=[f"Prediction {j+1}" for j in range(num_predictions)])
                     col.write(col_df)
                 else:
                     col.write("No predictions available")

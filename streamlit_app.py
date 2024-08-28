@@ -108,12 +108,12 @@ if selected == 3:
     uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
 
     # Add a reset button
-    reset_button = st.button("Reset")
+    #reset_button = st.button("Reset")
 
-    if reset_button:
+    #if reset_button:
         # Reset the uploaded file and other session state variables
-        for key in st.session_state.keys():
-            del st.session_state[key]
+        #for key in st.session_state.keys():
+            #del st.session_state[key]
 
     
     if uploaded_file:

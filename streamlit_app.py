@@ -111,9 +111,9 @@ if selected == 3:
     reset_button = st.button("Reset")
 
     if reset_button:
-    # Reset the uploaded file and other session state variables
-    for key in st.session_state.keys():
-        del st.session_state[key]
+        # Reset the uploaded file and other session state variables
+        for key in st.session_state.keys():
+            del st.session_state[key]
 
     
     if uploaded_file:

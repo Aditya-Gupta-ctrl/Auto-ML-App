@@ -279,14 +279,20 @@ if selected == 3:
             st.subheader("Prediction Result")
             st.write("Predictions:")
             
+            # Display the predictions
+            st.subheader("Prediction Result")
+            st.write("Predictions:")
+            
             # Divide the predictions into 10 columns
             num_cols = 10
             pred_cols = [y_pred[i:i + num_cols] for i in range(0, len(y_pred), num_cols)]
             
-            # Display the predictions in 10 columns
-            for i, col in enumerate(pred_cols):
-                st.write(f"Column {i+1}:")
-                st.write(col)
+            # Create 10 columns
+            cols = st.columns(num_cols)
+            
+            # Display the predictions in 10 columns side by side
+            for i, col in enumerate(pred_cols[0]):
+                cols[i].write(col)
     
             #st.subheader("Prediction Result")
             #st.write("Predictions:")

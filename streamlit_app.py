@@ -169,6 +169,59 @@ if selected == 3:
         st.write(data.head(10))  # display the first 10 rows of the data
 
 
+# Data Transformation tab
+if selected == 4:
+    st.header("Data Transformation")
+    
+    # Check if a file has been uploaded
+    if 'uploaded_file' in st.session_state:
+        # Get the uploaded file
+        uploaded_file = st.session_state.uploaded_file
+        
+        # Check if the uploaded file is not empty
+        if uploaded_file is not None:
+            # Load the uploaded data
+            if uploaded_file.name.endswith('.csv'):
+                bytes_data = uploaded_file.getbuffer()
+                text_io = io.TextIOWrapper(io.BytesIO(bytes_data))
+                data = pd.read_csv(text_io)
+            elif uploaded_file.name.endswith('.xlsx'):
+                bytes_data = uploaded_file.getbuffer()
+                data = pd.read_excel(bytes_data)
+            
+            # Display the data dimensions
+            st.write(f"Original Data Shape: {data.shape}")
+            
+            # Display the data table
+            st.write("Original Data Table:")
+            st.write(data.head(10))  # display the first 10 rows of the data
+            
+            # Add a feature to remove columns
+            if 'selected_columns' not in st.session_state:
+                st.session_state.selected_columns = []
+            
+            columns_to_remove = st.multiselect("Select columns to remove:", data.columns, key='columns_to_remove', default=st.session_state.selected_columns)
+            st.session_state.selected_columns = columns_to_remove
+            
+            if columns_to_remove:
+                data = data.drop(columns=columns_to_remove)
+                st.write("Columns removed successfully!")
+            
+            # Display the updated data dimensions
+            st.write(f"Updated Data Shape: {data.shape}")
+            
+            # Display the updated data table
+            st.write("Updated Data Table:")
+            st.write(data.head(10))  # display the first 10 rows of the updated data
+            
+            # Store the updated data in the session state
+            st.session_state.data = data
+        else:
+            st.error("Please upload a file in the Data Ingestion section")
+    else:
+        st.write("Please upload a file first.")
+
+
 # Auto Train ML Model Tab
 if selected == 5:
     st.header("Auto Train ML Model")

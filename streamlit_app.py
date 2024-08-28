@@ -292,7 +292,7 @@ if selected == 3:
             # Create a pandas Series for each column
             import pandas as pd
             for i, col in enumerate(cols):
-                col_series = pd.Series(transposed_pred_cols[i])
+                col_series = pd.Series([val for sublist in transposed_pred_cols[i] for val in sublist])
                 col.write(col_series)
     
             #st.subheader("Prediction Result")

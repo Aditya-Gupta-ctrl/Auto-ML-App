@@ -116,6 +116,8 @@ if selected == 3:
         # Reset the uploaded file and other session state variables
         st.session_state.uploaded_file = None
         st.session_state.data = None
+        st.experimental_rerun()  # Rerun the entire app
+
     
     if uploaded_file:
         # Store the uploaded file in the session state

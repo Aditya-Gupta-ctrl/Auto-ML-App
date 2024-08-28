@@ -116,7 +116,9 @@ if selected == 3:
         # Reset the uploaded file and other session state variables
         st.session_state.uploaded_file = None
         st.session_state.data = None
-        st.experimental_rerun()  # Rerun the entire app
+        #st.experimental_rerun()  # Rerun the entire app
+        st.experimental_memo.clear()  # Clear the memo cache
+        st.experimental_singleton.clear()  # Clear the singleton cache
 
     
     if uploaded_file:

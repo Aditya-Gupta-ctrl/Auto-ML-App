@@ -13,7 +13,7 @@ Description of the app ...
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/app-starter-kit?quickstart=1)
 
-#Features
+## Features
 
 The following features are available in this model:
 
@@ -23,7 +23,7 @@ The following features are available in this model:
 -Predictions: Get predictions on your uploaded data
 
 
-#How it Works
+## How it Works
 
 Here's a step-by-step guide on how to use this model:
 
@@ -33,7 +33,7 @@ Here's a step-by-step guide on how to use this model:
 -Get predictions on your uploaded data
 
 
-#Benefits
+## Benefits
 
 Using this model, you can:
 

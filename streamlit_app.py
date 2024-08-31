@@ -385,7 +385,7 @@ if selected == 5:
 # Freeze the Learning tab
 if selected == 6:
     st.header("Freeze the Learning")
-    st.subheader("Backchodi maat kar lawde kam chal raha hai chutiye")
+    st.subheader("under working")
 
 
 
@@ -515,8 +515,4 @@ if selected == 8:
     </div>
     """,unsafe_allow_html=True)
 
-    st.markdown("""
-    <div class="box">
-    lund lele
-    </div>
-    """,unsafe_allow_html=True)
+

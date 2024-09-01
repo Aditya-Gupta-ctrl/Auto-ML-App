@@ -53,7 +53,6 @@ with st.sidebar:
 #Home bar
 if selected == 0:
     st.header("Welcome to ML Model")
-    st.subheader("welcome to Rajesh Mishra")
 
     st.write("This is a machine learning model that allows you to upload your dataset, select the target column, and train a simple linear regression model. The model will then make predictions on the uploaded data.")
 

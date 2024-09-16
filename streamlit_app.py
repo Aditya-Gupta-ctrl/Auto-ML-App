@@ -181,8 +181,7 @@ if selected == 3:
             color_column = st.selectbox('Select Color column', columns)
             # Read in the CSV file
             data = pd.read_csv('your_file.csv')
-            
-            if len(data.columns) >= 2:
+            if 'data' in locals() and len(data.columns) >= 2:
                 # Your code here
                 x_column = 'column1'  # Replace with your x-axis column
                 y_column = 'column2'  # Replace with your y-axis column
@@ -209,7 +208,7 @@ if selected == 3:
                 # Display the chart
                 st.pyplot(fig)
             else:
-                print("The dataframe 'data' must have at least two columns.")
+                print("The dataframe 'data' must be defined and have at least two columns.")
             #st.scatter_chart(data, x=x_column, y=y_column, color='category')
         else:
             st.write("Please select a dataset with at least two columns to display a scatter chart.")

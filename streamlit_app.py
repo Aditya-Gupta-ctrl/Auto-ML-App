@@ -176,7 +176,7 @@ if selected == 3:
             x_column = st.selectbox('Select X-axis column', columns)
             y_column = st.selectbox('Select Y-axis column', columns)
             color_column = st.selectbox('Select Color column', columns)
-            st.scatter_chart(data, x=x_column, y=y_column, color='sepecies')
+            st.scatter_chart(data, x=x_column, y=y_column, color='category')
         else:
             st.write("Please select a dataset with at least two columns to display a scatter chart.")
 

@@ -214,6 +214,17 @@ if selected == 4:
             # Display the updated data table
             st.write("Updated Data Table:")
             st.write(data.head(10))  # display the first 10 rows of the updated data
+                    # Display the scatter chart
+            with st.expander('Data Visualization'):
+                if len(data.columns) >= 2:
+                    columns = data.columns.tolist()
+                    x_column = st.selectbox('Select X-axis column', columns)
+                    y_column = st.selectbox('Select Y-axis column', columns)
+                    color_column = st.selectbox('Select Color column', columns)
+                    st.scatter_chart(data, x=x_column, y=y_column, color=color_column)
+                else:
+                    st.write("Please select a dataset with at least two columns to display a scatter chart.")
+
             
             # Store the updated data in the session state
             st.session_state.data = data

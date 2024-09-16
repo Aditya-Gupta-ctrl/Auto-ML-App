@@ -179,8 +179,14 @@ if selected == 3:
             x_column = st.selectbox('Select X-axis column', columns)
             y_column = st.selectbox('Select Y-axis column', columns)
             color_column = st.selectbox('Select Color column', columns)
-            # Make sure the column 'category' exists in your dataframe
-            if 'category' in data.columns:
+            # Read in the CSV file
+            data = pd.read_csv('your_file.csv')
+            
+            if len(data.columns) >= 2:
+                # Your code here
+                x_column = 'column1'  # Replace with your x-axis column
+                y_column = 'column2'  # Replace with your y-axis column
+            
                 # Create a categorical color scale
                 color_scale = sns.color_palette("Set2", len(data['category'].unique()))
             
@@ -203,7 +209,7 @@ if selected == 3:
                 # Display the chart
                 st.pyplot(fig)
             else:
-                print("The column 'category' does not exist in your dataframe.")
+                print("The dataframe 'data' must have at least two columns.")
             #st.scatter_chart(data, x=x_column, y=y_column, color='category')
         else:
             st.write("Please select a dataset with at least two columns to display a scatter chart.")

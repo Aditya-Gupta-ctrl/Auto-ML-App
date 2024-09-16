@@ -13,6 +13,9 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import AdaBoostRegressor
+import seaborn as sns
+
+
 
 
 # Set page config
@@ -176,7 +179,12 @@ if selected == 3:
             x_column = st.selectbox('Select X-axis column', columns)
             y_column = st.selectbox('Select Y-axis column', columns)
             color_column = st.selectbox('Select Color column', columns)
-            st.scatter_chart(data, x=x_column, y=y_column, color='category')
+            # Create a continuous color scale
+            color_scale = sns.color_palette("viridis", as_cmap=True)
+            
+            # Display the scatter chart
+            st.scatter_chart(data, x=x_column, y=y_column, color=data['values'], cmap=color_scale)
+            #st.scatter_chart(data, x=x_column, y=y_column, color='category')
         else:
             st.write("Please select a dataset with at least two columns to display a scatter chart.")
 

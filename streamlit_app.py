@@ -179,11 +179,11 @@ if selected == 3:
             x_column = st.selectbox('Select X-axis column', columns)
             y_column = st.selectbox('Select Y-axis column', columns)
             color_column = st.selectbox('Select Color column', columns)
-            # Create a continuous color scale
-            color_scale = sns.color_palette("viridis", as_cmap=True)
+            # Create a categorical color scale
+            color_scale = sns.color_palette("Set2", len(data['category'].unique()))
             
             # Display the scatter chart
-            st.scatter_chart(data, x=x_column, y=y_column, color=data['values'], cmap=color_scale)
+            st.scatter_chart(data, x=x_column, y=y_column, color=data['category'], cmap=color_scale)
             #st.scatter_chart(data, x=x_column, y=y_column, color='category')
         else:
             st.write("Please select a dataset with at least two columns to display a scatter chart.")

@@ -171,49 +171,16 @@ if selected == 3:
         st.write("Data Table:")
         #st.write(data.head(10))    # display the first 10 rows of the data
         st.write(data)
-    
-            # Display the scatter chart
-    with st.expander('Data Visualization'):
-        if len(data.columns) >= 2:
-            columns = data.columns.tolist()
-            x_column = st.selectbox('Select X-axis column', columns)
-            y_column = st.selectbox('Select Y-axis column', columns)
-            color_column = st.selectbox('Select Color column', columns)
-            # Read in the CSV file
-            data = pd.read_csv('your_file.csv')
-            if 'data' in locals() and len(data.columns) >= 2:
-                # Your code here
-                x_column = 'column1'  # Replace with your x-axis column
-                y_column = 'column2'  # Replace with your y-axis column
-            
-                # Create a categorical color scale
-                color_scale = sns.color_palette("Set2", len(data['category'].unique()))
-            
-                # Create a figure and axis object
-                fig, ax = plt.subplots()
-            
-                # Plot the scatter chart
-                for i, cat in enumerate(data['category'].unique()):
-                    cat_data = data[data['category'] == cat]
-                    ax.scatter(cat_data[x_column], cat_data[y_column], label=cat, color=color_scale[i])
-            
-                # Set the title and labels
-                ax.set_title('Scatter Chart')
-                ax.set_xlabel(x_column)
-                ax.set_ylabel(y_column)
-            
-                # Add a legend
-                ax.legend()
-            
-                # Display the chart
-                st.pyplot(fig)
+        # Display the scatter chart
+        with st.expander('Data Visualization'):
+            if len(data.columns) >= 2:
+                columns = data.columns.tolist()
+                x_column = st.selectbox('Select X-axis column', columns)
+                y_column = st.selectbox('Select Y-axis column', columns)
+                color_column = st.selectbox('Select Color column', columns)
+                st.scatter_chart(data, x=x_column, y=y_column, color=color_column)
             else:
-                print("The dataframe 'data' must be defined and have at least two columns.")
-            #st.scatter_chart(data, x=x_column, y=y_column, color='category')
-        else:
-            st.write("Please select a dataset with at least two columns to display a scatter chart.")
-
-
+                st.write("Please select a dataset with at least two columns to display a scatter chart.")
 # Data Transformation tab
 if selected == 4:
     st.header("Data Transformation")

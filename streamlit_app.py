@@ -184,8 +184,24 @@ if selected == 3:
                 # Create a categorical color scale
                 color_scale = sns.color_palette("Set2", len(data['category'].unique()))
             
-                # Display the scatter chart
-                st.scatter_chart(data, x=x_column, y=y_column, color=data['category'].map({cat: i for i, cat in enumerate(data['category'].unique())}))
+                # Create a figure and axis object
+                fig, ax = plt.subplots()
+            
+                # Plot the scatter chart
+                for i, cat in enumerate(data['category'].unique()):
+                    cat_data = data[data['category'] == cat]
+                    ax.scatter(cat_data[x_column], cat_data[y_column], label=cat, color=color_scale[i])
+            
+                # Set the title and labels
+                ax.set_title('Scatter Chart')
+                ax.set_xlabel(x_column)
+                ax.set_ylabel(y_column)
+            
+                # Add a legend
+                ax.legend()
+            
+                # Display the chart
+                st.pyplot(fig)
             else:
                 print("The column 'category' does not exist in your dataframe.")
             #st.scatter_chart(data, x=x_column, y=y_column, color='category')
